@@ -40,6 +40,7 @@ const Card = (props) => {
 
     const catchPokemon = () => {
         if (pokemons.find(el => el.id === pokemonData.id)) {
+            setCaught(true);
             alert("You've already caught this one!");
         } else {
             setCaught(true);
