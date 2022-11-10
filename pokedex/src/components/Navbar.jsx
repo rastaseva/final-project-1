@@ -11,7 +11,8 @@ const Navibar = () => {
                 <Navbar.Collapse id='responsive-navbar-nav'>
                     <Nav className='mr-auto'>
                         <Nav.Link><Link to="/?">Home</Link></Nav.Link>
-                        <Nav.Link><Link to="/pokeball">Favourite</Link></Nav.Link>
+                        <Nav.Link><Link to="/favourite">Favourite</Link></Nav.Link>
+                        <Nav.Link><Link to="/search">Search</Link></Nav.Link>
                     </Nav>
 
                 </Navbar.Collapse>

@@ -19,20 +19,27 @@ const PokemonDetails = (props) => {
     const [pokemon, setPokemon] = useState([]);
     const { pokemons } = useContext(PokemonContext)
     const [loading, setLoading] = useState(false);
+    const [errCheck, setErrCheck] = useState(false)
     const [pokemonPic, setPokemonPic] = useState([]);
     const [abilities, setAbilities] = useState([]);
     const [types, setTypes] = useState([]);
-    
+
 
     useEffect(() => {
         const getPokemon = async () => {
-            setLoading(true);
-            const info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            setPokemon(info.data);
-            setPokemonPic(info.data.sprites.other['official-artwork'].front_default);
-            setAbilities(info.data.abilities);
-            setTypes(info.data.types);
-            setLoading(false);
+            try {
+                setLoading(true);
+                const info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                setPokemon(info.data);
+                setPokemonPic(info.data.sprites.other['official-artwork'].front_default);
+                setAbilities(info.data.abilities);
+                setTypes(info.data.types);
+                setLoading(false);
+            }
+            catch (err) {
+                setLoading(false);
+                setErrCheck(true);
+            }
         }
 
         getPokemon();
@@ -41,7 +48,7 @@ const PokemonDetails = (props) => {
     let obj;
     pokemons.find(el => {
         if (el.name === pokemon.name) {
-            pokemon.caughtDate = el.caughtDate; 
+            pokemon.caughtDate = el.caughtDate;
         }
         return obj;
     });
@@ -56,6 +63,10 @@ const PokemonDetails = (props) => {
 
     if (loading) {
         return <h2>Loading...</h2>
+    }
+
+    if (errCheck) {
+        return <h2>There is no such pokemon!</h2>
     }
 
 
