@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 
@@ -10,17 +11,19 @@ function SearchForm(props) {
         setName(e.target.value);
     }
 
+
     function handleSubmit(e) {
         if (name === '') {
-            return alert('You should write any pokemon name before adding them!')
+            e.preventDefault();
+            return alert('You should write any pokemon name for correct search!')
         }
-        e.preventDefault();
-        
-        setName("");
+
+        setName('');
     }
-    
+
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form >
             <input
                 type="text"
                 id="new-todo-input"
@@ -30,13 +33,13 @@ function SearchForm(props) {
                 value={name}
                 onChange={handleChange}
             />
-            <Link to={`/pokemons/${name}`} >
-                <button type="submit" className="btn btn__primary btn__lg">
+            <Link to={`pokemons/${name.toLowerCase()}`}>
+                <Button type="submit" className="btn btn__primary btn__lg" onClick={handleSubmit}>
                     Find!
-                </button>
-            </Link>
-            
-        </form>
+                </Button>
+            </Link >
+
+        </form >
 
     );
 }

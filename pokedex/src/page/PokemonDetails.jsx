@@ -26,8 +26,11 @@ const PokemonDetails = (props) => {
 
 
     useEffect(() => {
+
         const getPokemon = async () => {
+
             try {
+                
                 setLoading(true);
                 const info = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
                 setPokemon(info.data);
@@ -35,17 +38,23 @@ const PokemonDetails = (props) => {
                 setAbilities(info.data.abilities);
                 setTypes(info.data.types);
                 setLoading(false);
+
             }
+
             catch (err) {
+
                 setLoading(false);
                 setErrCheck(true);
+
             }
+
         }
 
         getPokemon();
     }, [id]);
 
     let obj;
+
     pokemons.find(el => {
         if (el.name === pokemon.name) {
             pokemon.caughtDate = el.caughtDate;

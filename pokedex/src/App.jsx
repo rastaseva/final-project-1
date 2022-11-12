@@ -3,7 +3,8 @@ import Navibar from './components/Navbar';
 import PokeField from './page/PokeField';
 import Pokeball from './page/Pokeball';
 import PokemonDetails from './page/PokemonDetails';
-import SearchForm from './components/SearchForm';
+import SearchForm from './page/SearchForm';
+import SignIn from './page/SignIn';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                     <Route exact path='/favourite' component={Pokeball} />
                     <Route path='/pokemons/:id' component={PokemonDetails} />
                     <Route path='/search' component={SearchForm} />
+                    <Route path='/sign_in' component={SignIn} />
                 </Switch>
             </div>
         </div>
