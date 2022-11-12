@@ -5,7 +5,7 @@ import CardBox from "../components/CardBox";
 const PokeField = () => {
     const [nextPage, setNextPage] = useState();
     const [pokemons, setPokemon] = useState([]);
-    const [currentPage, setCurrentPage] = useState(`https://pokeapi.co/api/v2/pokemon?limit=18`);
+    const [currentPage, setCurrentPage] = useState(`https://pokeapi.co/api/v2/pokemon?limit=27`);
     const [fetching, setFetching] = useState(true);
 
     useEffect(() => {
