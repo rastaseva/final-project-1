@@ -18,7 +18,7 @@ function getIdList() {
 
 
 
-const SignIn = () => {
+const SignUp = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
@@ -31,53 +31,24 @@ const SignIn = () => {
         e.preventDefault()
         setPassword(e.target.value);
     }
-    function checkExistUser(e) {
-        let count = 0;
-
+    function addUser(e) {
         getIdList()
-
         const user = {
             login: login,
             password: password,
         }
 
-
-        try {
-            const checkUser = JSON.parse(localStorage.getItem(`user_#${user.login}`))
-
-            console.log(user.login === checkUser.login, user.password === checkUser.password);
-
-            if (user.login === checkUser.login) {
-                count++
-
-            }
-            if (user.password === checkUser.password) {
-                count++
-            }
-            if (count === 2) {
-
-                setLogin('')
-                setPassword('')
-                return alert(`U've singed in!`)
-
-            }
-
-            e.preventDefault()
-
-            setLogin('')
-            setPassword('')
-
-            alert('Wrong login or password, try again!')
-        }
-        catch {
-
-
-            e.preventDefault()
-            setLogin('')
-            setPassword('')
-            alert('Wrong login or password, try again!')
+        if (localStorage.length === 0) {
+            user.id = 1
+        } else {
+            user.id = idList[idList.length - 1] + 1
         }
 
+
+        localStorage.setItem(`user_#${user.login}`, JSON.stringify(user))
+        setLogin('')
+        setPassword('')
+        alert(`U've been signed up!`)
     }
 
     return (
@@ -102,13 +73,11 @@ const SignIn = () => {
                     onChange={handlePasswordChange}
                 />
             </form>
-            <Link to={'/?'}>
-                <Button type="submit" className="btn btn__primary btn__lg" onClick={checkExistUser}>
-                    Sing in!
-                </Button>
-            </Link>
+            <Button type="submit" className="btn btn__primary btn__lg" onClick={addUser}>
+                Sing up!
+            </Button>
         </div>
     );
 }
 
-export default SignIn;
+export default SignUp;
