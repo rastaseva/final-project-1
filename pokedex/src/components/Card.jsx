@@ -89,7 +89,7 @@ const Card = (props) => {
 
     return (
         <div style={cardInfo} className={`${props.name}_info`}>
-            <Link to={`/pokemons/${pokemonData.id}`} >
+            <Link to={`/pokemons/${pokemonData.name}`} >
                 <img style={cardImg} src={pokemonPic} alt={props.name}
                     onError={(e) => { e.target.onerror = null; e.target.src = process.env.PUBLIC_URL + '/unknown.png' }} />
             </Link>
