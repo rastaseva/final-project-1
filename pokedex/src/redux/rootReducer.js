@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { pokemonsReducer } from './pokemonsReducer'
+import { signFormReducer } from './signFormReducer'
 
 export const rootReducer = combineReducers({
-    // pokemons: pokemonsReducer.reducer,
+    signForm: signFormReducer.reducer
 })

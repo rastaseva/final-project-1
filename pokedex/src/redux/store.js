@@ -1,11 +1,12 @@
 import { compose } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { rootReducer } from './rootReducer';
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { pokemonApi } from './pokemonApi';
+import { rootReducer } from './rootReducer'
 
 export const store = configureStore({
         reducer: {
+            rootReducer,
             [pokemonApi.reducerPath]: pokemonApi.reducer,
         },
         // Adding the api middleware enables caching, invalidation, polling,

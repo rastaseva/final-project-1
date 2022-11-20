@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { signFormChanger } from "../redux/signFormReducer";
 
 const idList = []
 
@@ -19,6 +20,8 @@ function getIdList() {
 
 
 const SignUp = () => {
+  const signStateChanger = useSelector((state) => state.rootReducer.signForm.signIn)
+  const dispatch = useDispatch()
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [confPass, setConfPass] = useState('');
@@ -85,7 +88,7 @@ const SignUp = () => {
       } else {
         localStorage.setItem(`user_#${user.login}`, JSON.stringify(user))
         clearInputs()
-
+        dispatch(signFormChanger())
         alert(`U've been signed up!`)
       }
     }

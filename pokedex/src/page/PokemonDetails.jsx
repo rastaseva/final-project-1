@@ -16,7 +16,6 @@ const PokemonDetails = (props) => {
 
   const { id } = useParams();
   const { data } = useGetPokemonByNameQuery(id)
-
   const [pokemon, setPokemon] = useState([]);
   const { pokemons } = useContext(PokemonContext)
   const [loading, setLoading] = useState(false);
@@ -25,13 +24,17 @@ const PokemonDetails = (props) => {
   const [abilities, setAbilities] = useState([]);
   const [types, setTypes] = useState([]);
 
-  useEffect(() => {
 
+
+
+
+  useEffect(async () => {
 
     try {
 
       setLoading(true);
-      setPokemon(data)
+
+      await setTimeout(() => setPokemon(data), 0);
       setPokemonPic(data.sprites.other['official-artwork'].front_default);
       setAbilities(data.abilities);
       setTypes(data.types);
@@ -46,7 +49,7 @@ const PokemonDetails = (props) => {
 
     }
 
-  }, [id]);
+  }, []);
 
 
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { signFormChanger } from "../redux/signFormReducer";
 
 
 const idList = []
@@ -19,9 +21,10 @@ function getIdList() {
 
 
 const SignIn = () => {
+  const signStateChanger = useSelector((state) => state.rootReducer.signForm.signIn)
+  const dispatch = useDispatch()
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-
   function handleLoginChange(e) {
     e.preventDefault()
     setLogin(e.target.value);
@@ -40,12 +43,12 @@ const SignIn = () => {
       login: login,
       password: password,
     }
+    const signChanger = () => { dispatch(signFormChanger()) }
 
 
     try {
       const checkUser = JSON.parse(localStorage.getItem(`user_#${user.login}`))
 
-      console.log(user.login === checkUser.login, user.password === checkUser.password);
 
       if (user.login === checkUser.login) {
         count++
@@ -58,6 +61,7 @@ const SignIn = () => {
 
         setLogin('')
         setPassword('')
+        dispatch(signFormChanger())
         return alert(`U've singed in!`)
 
       }
@@ -66,6 +70,7 @@ const SignIn = () => {
 
       setLogin('')
       setPassword('')
+      signChanger()
 
       alert('Wrong login or password, try again!')
     }
@@ -75,6 +80,8 @@ const SignIn = () => {
       e.preventDefault()
       setLogin('')
       setPassword('')
+      signChanger()
+
       alert('Wrong login or password, try again!')
     }
 
